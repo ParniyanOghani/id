@@ -1,0 +1,55 @@
+def check_str_input(temp):
+    if temp.isprintable() and temp.isalpha() and not(temp.isnumeric() or temp.isdigit() or temp.isspace()):
+        return True
+    return False
+
+def info_validation(ID, fname, lname, location, occupation, nationality, gender, education):
+    check_info = dict()
+    
+    if ID.isdigit() and ID.isdecimal() and (int(ID) > 999 and int(ID) < 10000):
+        check_info['ID'] = True
+    check_info['fname'] = check_str_input(fname)
+    check_info['lname'] = check_str_input(lname)
+    check_info['location'] = check_str_input(location)
+    check_info['occupation'] = check_str_input(occupation)
+    check_info['nationality'] = check_str_input(nationality)
+    check_info['gender'] = check_str_input(gender)
+    check_info['education'] = check_str_input(education)
+    
+    return check_info
+
+def get_info():
+    info = {'ID': -1,'name': -1, 'location': -1, 'occupation': -1, 'nationality': -1, 'education': -1}
+    
+    while True:
+        ID = input("Enter your identification code: ")
+        fname = input("Enter your first name: ")
+        lname = input("Enter your last name: ")
+        location = input("Where do you live? ")
+        occupation = input("What do you do? ")
+        nationality = input("Where are you from? ")
+        gender = input("What is your gender? ")
+        education = input("What is your educational level? ")
+        
+        result =  info_validation(ID, fname, lname, location, occupation)
+        
+        if result['ID'] and result['fname'] \
+            and result['lname'] and result['location'] \
+                and result['occupation'] \
+                    and result['nationality']\
+                        and result['gender']\
+                            and result['education']:
+            info = {
+                'ID': ID,
+                'name': fname.capitalize() + lname.capitalize(),
+                'location': location,
+                'occupation': occupation,
+                'nationality': nationality,
+                'gender': gender,
+                'education': education
+            }
+            return info
+        
+        #nationality, gender and education were added
+        
+        print("\n\Warning! Enter valid information\n\n")
